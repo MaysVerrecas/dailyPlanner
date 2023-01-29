@@ -1,11 +1,13 @@
 package task;
 
+import exeption.IncorrectArgumentExeption;
+
 import java.time.LocalDate;
 
 public class YearlyTask extends Task{
     private final Repeatability repeat;
 
-    public YearlyTask(String taskName, TaskType type, String description) {
+    public YearlyTask(String taskName, TaskType type, String description) throws IncorrectArgumentExeption {
         super(taskName, type, description);
         this.repeat = Repeatability.YEARLY;
     }
