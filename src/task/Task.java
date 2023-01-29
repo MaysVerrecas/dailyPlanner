@@ -8,18 +8,17 @@ import java.util.Objects;
 
 public abstract class Task {
     private static int counter = 1;
-    public enum TaskType {
-        PERSONAL,
-        WORK
-    }
+
+
+
 
 
     private String taskName;
     private TaskType type;
     private String description;
     private LocalDate date;
-    private final int id;
-
+    private int id;
+    private boolean delete;
     public Task(
             String taskName,
             TaskType type,
@@ -30,6 +29,7 @@ public abstract class Task {
         setType(type);
         setDescription(description);
         counter++;
+        delete = false;
     }
 
     public String getTaskName() {
@@ -42,7 +42,6 @@ public abstract class Task {
         } else {
             throw new IncorrectArgumentExeption("Название задачи");
         }
-
     }
 
     public TaskType getType() {
@@ -68,18 +67,17 @@ public abstract class Task {
             throw new IncorrectArgumentExeption("Описание задачи");
         }
     }
-
     public LocalDate getDate() {
+        if (date.isBefore(LocalDate.now())) {
+            this.date = dateRepeat();
+        }
         return date;
     }
-    private LocalDate loadDate(int year, int month, int dayOfMonth) {
-        return LocalDate.of(year, month, dayOfMonth);
-    }
-    public void setDate(int year, int month, int dayOfMonth) throws IncorrectDateExeption {
-        if (loadDate(year, month, dayOfMonth).isAfter(LocalDate.now())) {
+    public void setDate(LocalDate localDate) throws IncorrectDateExeption {
+        if (localDate.isBefore(LocalDate.now())) {
             throw new IncorrectDateExeption("Задача не может быть добавлена в прошлое");
         } else {
-            this.date = loadDate(year, month, dayOfMonth);
+            this.date = localDate;
         }
     }
 
@@ -87,6 +85,13 @@ public abstract class Task {
         return id;
     }
 
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -115,4 +120,7 @@ public abstract class Task {
     public abstract LocalDate dateRepeat();
     public abstract void printDateRepeat();
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }

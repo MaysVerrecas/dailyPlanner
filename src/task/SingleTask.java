@@ -14,7 +14,7 @@ public class SingleTask extends Task{
 
     @Override
     public LocalDate dateRepeat() {
-        return this.getDate();
+        return null;
     }
 
     @Override
