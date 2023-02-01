@@ -31,4 +31,8 @@ public class DailyTask extends Task{
     public String toString() {
        return super.toString() + "repeat = " + getRepeat();
     }
+    @Override
+    public boolean appearsIn(LocalDate localDate) {
+        return localDate.isAfter(getDate()) || localDate.isEqual(getDate());
+    }
 }

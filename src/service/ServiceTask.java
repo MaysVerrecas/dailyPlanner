@@ -26,7 +26,7 @@ public class ServiceTask {
     public List<Task> getAllByDate (LocalDate localDate) throws TaskNotFoundExeption { //список по дате
         List<Task> taskList = new ArrayList<>();
         for (Task task : taskMap.values()) {
-            if (task.getDate() != null & task.getDate().isEqual(localDate) & !task.isDelete()){
+            if (task.appearsIn(localDate) && !task.isDelete()){
                 taskList.add(task);
             }
         }

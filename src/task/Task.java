@@ -119,6 +119,7 @@ public abstract class Task {
 
     public abstract LocalDate dateRepeat();
     public abstract void printDateRepeat();
+    public abstract boolean appearsIn(LocalDate localDate);
 
     public void setId(int id) {
         this.id = id;
