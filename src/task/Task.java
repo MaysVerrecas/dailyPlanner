@@ -61,7 +61,7 @@ public abstract class Task {
     }
 
     public void setDescription(String description) throws IncorrectArgumentExeption {
-        if (description != null || !description.isEmpty() || !description.isBlank()) {
+        if (description != null && !description.isEmpty() && !description.isBlank()) {
             this.description = description;
         } else {
             throw new IncorrectArgumentExeption("Описание задачи");
