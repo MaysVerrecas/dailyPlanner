@@ -1,18 +1,20 @@
 package task;
 
+import exeption.IncorrectArgumentExeption;
+
 import java.time.LocalDate;
 
 public class SingleTask extends Task{
     private final Repeatability repeat;
 
-    public SingleTask(String taskName, TaskType type, String description) {
+    public SingleTask(String taskName, TaskType type, String description) throws IncorrectArgumentExeption {
         super(taskName, type, description);
         this.repeat = Repeatability.YEARLY;
     }
 
     @Override
     public LocalDate dateRepeat() {
-        return this.getDate();
+        return null;
     }
 
     @Override
@@ -26,5 +28,9 @@ public class SingleTask extends Task{
     @Override
     public String toString() {
         return super.toString() + "repeat = " + getRepeat();
+    }
+    @Override
+    public boolean appearsIn(LocalDate localDate) {
+        return localDate.equals(getDate());
     }
 }

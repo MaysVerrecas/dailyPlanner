@@ -1,10 +1,12 @@
 package task;
 
+import exeption.IncorrectArgumentExeption;
+
 import java.time.LocalDate;
 
 public class MonthlyTask extends Task{
     private final Repeatability repeat;
-    public MonthlyTask(String taskName, TaskType type, String description) {
+    public MonthlyTask(String taskName, TaskType type, String description) throws IncorrectArgumentExeption {
         super(taskName, type, description);
         this.repeat = Repeatability.MONTHLY;
     }
@@ -26,5 +28,13 @@ public class MonthlyTask extends Task{
     @Override
     public String toString() {
         return super.toString() + "repeat = " + getRepeat();
+    }
+    @Override
+    public boolean appearsIn(LocalDate localDate) {
+        if (localDate.isAfter(getDate()) || localDate.isEqual(getDate()) && localDate.getDayOfMonth() == getDate().getDayOfMonth()){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
